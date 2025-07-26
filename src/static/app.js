@@ -87,6 +87,3 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize app
   fetchActivities();
 });
-  // Initialize app
-  fetchActivities();
-});
