@@ -10,10 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch("/activities");
       const activities = await response.json();
 
-      // Clear loading message
       activitiesList.innerHTML = "";
 
-      // Populate activities list
       Object.entries(activities).forEach(([name, details]) => {
         const activityCard = document.createElement("div");
         activityCard.className = "activity-card";
@@ -25,11 +23,16 @@ document.addEventListener("DOMContentLoaded", () => {
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+          <div class="participants-section" style="margin-top:1em;background:#f8f9fa;border-radius:6px;padding:0.5em 1em;box-shadow:0 1px 2px rgba(0,0,0,0.03);">
+            <h5 style="margin:0 0 0.5em 0;font-size:1.05em;color:#2c3e50;font-weight:600;">Participants</h5>
+            <ul class="participants-list" style="margin:0;padding-left:1.2em;list-style-type:disc;color:#34495e;font-size:0.97em;">
+              ${details.participants.map(email => `<li style="margin-bottom:0.2em;word-break:break-all;">${email}</li>`).join("")}
+            </ul>
+          </div>
         `;
 
         activitiesList.appendChild(activityCard);
 
-        // Add option to select dropdown
         const option = document.createElement("option");
         option.value = name;
         option.textContent = name;
